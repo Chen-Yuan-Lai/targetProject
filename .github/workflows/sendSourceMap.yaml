@@ -20,7 +20,6 @@ jobs:
           cache: npm
       - name: Build Source Map
         run: |
-          npm install
           npx esbuild ./app.js --bundle --sourcemap --format=esm --platform=node
           --outfile=./bundle.js
       - name: Upload Source Map
