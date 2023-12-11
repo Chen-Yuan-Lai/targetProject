@@ -10,20 +10,24 @@ jobs:
   build-and-upload-source-map:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
       - name: Build Source Map
-        run: >-
+        run: |
+          npm install
           npx esbuild ./app.js --bundle --sourcemap --format=esm --platform=node
           --outfile=./bundle.js
       - name: Upload Source Map
         env:
           USER_KEY: ${{ secrets.USER_KEY }}
           CLIENT_TOKEN: ${{ secrets.CLIENT_TOKEN }}
-        run: |-
+        run: |
           curl -X POST http://handsomelai.shop/api/1.0/sourceMap \
                         -H "Content-Type: multipart/form-data" \
                         -F "map=./bundle.js.map;type=application/octet-stream" \
