@@ -11,11 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Node
-        uses: actions/setup-node@4
+        uses: actions/setup-node@3
         with:
           node-version: 20
           cache: npm
-      - run: npm i esbuild
       - name: Build Source Map
         run: >-
           npx esbuild ./app.js --bundle --sourcemap --format=esm --platform=node
