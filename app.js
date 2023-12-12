@@ -1,8 +1,7 @@
 import pg from 'pg';
 import express from 'express';
 import cors from 'cors';
-
-import ErrorExporterSDK from '../sdk/index.js';
+import sdk from '@falconeye-tech/sdk';
 
 const app = express();
 const port = 3001;
@@ -21,19 +20,19 @@ const pool = new Pool({
 
 export default pool;
 
-const er = new ErrorExporterSDK();
+const er = new sdk();
+
+// await er.init({
+//   apiHost: 'http://localhost',
+//   userKey: 'f7da9241-4308-4a97-81c1-e25819140532',
+//   clientToken: '324d903f-7d5f-416c-9f50-4088483465c9',
+// });
 
 await er.init({
-  apiHost: 'http://localhost',
+  apiHost: 'https://handsomelai.shop',
   userKey: 'aceefc85-1a30-4829-ad0d-f3efc38ee0e8',
   clientToken: '02a90cb4-afa8-44b5-9682-eae63a8bc1c1',
 });
-
-// await er.init({
-//   apiHost: 'https://handsomelai.shop',
-//   userKey: 'aceefc85-1a30-4829-ad0d-f3efc38ee0e8',
-//   clientToken: '02a90cb4-afa8-44b5-9682-eae63a8bc1c1',
-// });
 
 app.use(cors());
 
