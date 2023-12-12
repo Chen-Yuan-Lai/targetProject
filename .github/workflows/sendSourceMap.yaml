@@ -29,6 +29,6 @@ jobs:
         run: |-
           curl -X POST https://handsomelai.shop/api/1.0/sourceMap \
                         -H "Content-Type: multipart/form-data" \
-                        -F "map=./bundle.js.map;type=application/octet-stream" \
+                        -F "map=@./bundle.js.map;type=application/octet-stream" \
                         -F "userKey=${USER_KEY}" \
                         -F "clientToken=${CLIENT_TOKEN}"
