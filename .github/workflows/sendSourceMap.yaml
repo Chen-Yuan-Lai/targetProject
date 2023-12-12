@@ -10,12 +10,14 @@ jobs:
   build-and-upload-source-map:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
-      - run: npm i esbuild
       - name: Build Source Map
         run: >-
           npx esbuild ./app.js --bundle --sourcemap --format=esm --platform=node
