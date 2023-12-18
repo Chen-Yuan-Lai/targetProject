@@ -19,9 +19,7 @@ jobs:
           cache: npm
       - run: npm install
       - name: Build Source Map
-        run: >-
-          npx esbuild ./app.js --bundle --sourcemap --format=esm --platform=node
-          --outfile=./bundle.js
+        run: npx @falconeye-tech/wizard build ./app.js -o ./bundle.js
       - name: Upload Source Map
         env:
           USER_KEY: ${{ secrets.USER_KEY }}

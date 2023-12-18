@@ -1,6 +1,8 @@
 import pg from 'pg';
 import express from 'express';
 import cors from 'cors';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'node:url';
 import sdk from '@falconeye-tech/sdk';
 
 const app = express();
@@ -22,19 +24,21 @@ export default pool;
 
 const er = new sdk();
 
+await er.init({
+  apiHost: 'https://www.handsomelai.shop',
+  userKey: '9ac93750-36cc-402c-911b-b7f4bd58c10a',
+  clientToken: 'd74b0083-9bc7-43b6-b337-0cb971b8c0aa',
+});
 // await er.init({
 //   apiHost: 'http://localhost',
-//   userKey: 'f7da9241-4308-4a97-81c1-e25819140532',
-//   clientToken: '324d903f-7d5f-416c-9f50-4088483465c9',
+//   userKey: '526acaff-5726-40c7-a8ae-949b8ee23b46',
+//   clientToken: 'ca048536-f004-4b11-ae88-40bb1878666f',
 // });
 
-await er.init({
-  apiHost: 'https://handsomelai.shop',
-  userKey: 'aceefc85-1a30-4829-ad0d-f3efc38ee0e8',
-  clientToken: '02a90cb4-afa8-44b5-9682-eae63a8bc1c1',
-});
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(er.requestHandler());
 app.get('/programError', async (req, res, next) => {
@@ -89,6 +93,8 @@ app.get('/databaseError', async (req, res, next) => {
     next(e);
   }
 });
+
+// hii;
 
 app.use(er.errorHandler());
 
