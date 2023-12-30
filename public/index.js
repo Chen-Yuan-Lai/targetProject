@@ -8,5 +8,5 @@ error1Btn.addEventListener('click', async e => {
 
 error2Btn.addEventListener('click', async e => {
   e.preventDefault();
-  await fetch('/programError');
+  await fetch('/referenceError');
 });
