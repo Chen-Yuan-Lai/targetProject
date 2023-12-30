@@ -7,8 +7,6 @@ import sdk from '@falconeye-tech/sdk';
 const app = express();
 const port = 3001;
 
-export default pool;
-
 const er = new sdk();
 
 await er.init({
@@ -35,7 +33,8 @@ app.get('/typeError', async (req, res, next) => {
 
 app.get('/referenceError', async (req, res, next) => {
   try {
-    console.logg('Hi');
+    console.log('Hi');
+    throw new Error('This is an error!');
   } catch (e) {
     // er.captureError(e);
     next(e);
